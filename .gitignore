@@ -1,0 +1,21 @@
+# Mac
+.DS_Store
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Python
+*.py[co]
+*.so
+*.egg
+*.egg-info
+
+# IDEA
+.idea
+
+# Others
+build/
+*.swap
+*~
+*.log
