@@ -1,10 +1,13 @@
 #!/bin/bash
 
 . util.sh
+. platform.sh
 
 main() {
 
-  PKMGR=`env_detect`
+  PKMGR=`platform_check`
+  LOG INFO $PKMGR
+  exit
   if [[ $? != 0 ]]; then
     LOG ERROR "Platform Unknown!"
     exit

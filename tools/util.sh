@@ -9,18 +9,3 @@ LOG () {
 INSTALL() {
   PKMGR=$1
 }
-
-set_env() {
-  declare -A osInfo;
-  osInfo[/etc/redhat-release]=yum
-  osInfo[/etc/debian_version]=apt-get
-
-  for f in ${!osInfo[@]}
-  do
-    if [[ -f $f ]]; then
-      echo ${osInfo[$f]}
-      return 0
-    fi
-  done
-  return 1
-}
