@@ -26,12 +26,14 @@ LG_debian() {
 
 
 LG_platform_check() {
+  if [[ $(uname) == 'Darwin' ]]; then
+    LG_apple
+    return 0
+
   echo -n "Enter your password: "
   read -s passwd
   export passwd=$passwd
-  if [[ $(uname) == 'Darwin' ]]; then
-    LG_apple
-  elif [[ -f /etc/redhat-release ]]; then
+  if [[ -f /etc/redhat-release ]]; then
     LG_redhat
   elif [[ -f /etc/debian_version ]]; then
     LG_debian
