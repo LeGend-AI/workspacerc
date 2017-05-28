@@ -10,7 +10,7 @@ LG_apple() {
   if type brew >/dev/null 2>/dev/null; then
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   fi
-  brew -f update
+  brew --force update
   export PKMGR='brew'
 }
 
