@@ -15,7 +15,7 @@ LG_apple() {
 }
 
 LG_redhat() {
-  echo ${passwd}'\n' | sudo -S yum makecache
+  echo -e ${passwd}"\n" | sudo -S yum makecache
   if [ $? -ne 0 ]; then
     echo "Update failed! Maybe password is wrong"
     exit 1
@@ -24,7 +24,7 @@ LG_redhat() {
 }
 
 LG_debian() {
-  echo ${passwd}'\n' | sudo -S apt-get update
+  echo -e ${passwd}"\n" | sudo -S apt-get update
   if [ $? -ne 0 ]; then
     echo "Update failed! Maybe password is wrong"
     exit 1
