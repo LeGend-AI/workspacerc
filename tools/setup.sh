@@ -8,8 +8,9 @@ main() {
     exit 1
   fi
 
-  if type git >/dev/null 2>/dev/null; then
-    LG_INSTALL git
+  if ! type git >/dev/null 2>/dev/null; then
+    echo "git not installed..."
+    exit 1
   fi
   git clone http://github.com/legend-ai/workspacerc ${WORK_HOME}
   cd ${WORK_HOME}/tools
@@ -28,13 +29,13 @@ main() {
 
   LG_LOG INFO "zsh setup..."
   if type zsh >/dev/null 2>/dev/null; then
-    INSTALL zsh
+    LG_INSTALL zsh
   fi
   cd ../zsh && sh install.sh && cd ../tools
 
   LG_LOG INFO "vim setup..."
   if type vim >/dev/null 2>/dev/null; then
-    INSTALL vim
+    LG_INSTALL vim
   fi
   cd ../vim && zsh install.sh && cd ../tools
 }
