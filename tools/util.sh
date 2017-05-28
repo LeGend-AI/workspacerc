@@ -5,7 +5,3 @@ LOG () {
     echo -e [$1] [`date +"%F %T"`] $2
   fi
 }
-
-INSTALL() {
-  PKMGR=$1
-}

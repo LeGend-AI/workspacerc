@@ -1,8 +1,12 @@
 main() {
-  if type vim >/dev/null 2>/dev/null; then
-    $PKMGR install -y vim
+  if [[ -d ${HOME}/.vim ]]; then
+    rm -rf ${HOME}/.vim
   fi
-  cp -r .vim* ~
+  if [[ -f ${HOME}/.vimrc ]]; then
+    rm ${HOME}/.vimrc
+  fi
+  ln -s ${WORK_HOME}/vim/.vim ${HOME}/.vim
+  ln -s ${WORK_HOME}/vim/.vimrc ${HOME}/.vimrc
 }
 
 main

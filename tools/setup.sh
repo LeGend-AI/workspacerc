@@ -1,30 +1,41 @@
 #!/bin/bash
 
-. util.sh
-. platform.sh
-
 main() {
 
-  PKMGR=`platform_check`
-  LOG INFO $PKMGR
-  exit
-  if [[ $? != 0 ]]; then
-    LOG ERROR "Platform Unknown!"
-    exit
+  export WORK_HOME=${HOME}/.workspacerc
+  if [[ -d ${WORK_HOME} ]]; then
+    echo ${WORK_HOME}" already exists."
+    exit 1
   fi
 
-  LOG INFO "Package Manager: "$PKMGR
-  LOG INFO "Home dir: "$HOME
+  if type git >/dev/null 2>/dev/null; then
+    INSTALL git
+  fi
+  git clone http://github.com/legend-ai/workspacerc ${WORK_HOME}
+  cd ${WORK_HOME}/tools
+
+  source util.sh
+  source platform.sh
+
+  platform_check
+  if [[ $? != 0 ]]; then
+    LOG ERROR "Platform Unknown!"
+    exit 1
+  fi
 
   LOG INFO "git setup..."
+  cd ../git && sh install.sh && cd ../tools
 
   LOG INFO "zsh setup..."
   if type zsh >/dev/null 2>/dev/null; then
-    $PKMGR install zsh -y
+    INSTALL zsh
   fi
-  sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+  cd ../zsh && sh install.sh && cd ../tools
 
   LOG INFO "vim setup..."
+  if type vim >/dev/null 2>/dev/null; then
+    INSTALL vim
+  fi
   cd ../vim && zsh install.sh && cd ../tools
 }
 
