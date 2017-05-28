@@ -1,6 +1,6 @@
 main() {
   if [ ! -d ${HOME}/.oh-my-zsh ]; then
-    sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+    echo exit | sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
   fi
 
   if [ ! -d ${HOME}/bin ]; then
@@ -13,7 +13,7 @@ main() {
 
   if [ "${LG_WORKSPACERC}" != "LeGend-AI" ]; then
     cat ${WORK_HOME}/zsh/.zshrc >> ${HOME}/.zshrc
-    source ${HOME}/.zshrc
+    source ${WORK_HOME}/.zshrc
   fi
 }
 

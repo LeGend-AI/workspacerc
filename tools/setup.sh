@@ -32,6 +32,7 @@ main() {
     LG_INSTALL zsh
   fi
   cd ../zsh && sh install.sh && cd ../tools
+  source ${HOME}/.zshrc
 
   LG_LOG INFO "vim setup..."
   if ! type vim >/dev/null 2>/dev/null; then
