@@ -42,9 +42,6 @@ LG_platform_check() {
   echo -n "Enter your password: "
   read -s passwd
   export passwd=$passwd
-  if 1 ; then
-    exit
-  fi
   if [ -f /etc/redhat-release ]; then
     LG_redhat
   elif [ -f /etc/debian_version ]; then
