@@ -2,7 +2,7 @@ LG_INSTALL() {
   if [ $PKMGR == "brew" ]]; then
     brew install -y -q $*
   else
-    echo $passwd | sudo $PKMGR install -y -q $*
+    echo -e ${passwd}'\n' | sudo -S $PKMGR install -y -q $*
   fi
 }
 
@@ -15,12 +15,12 @@ LG_apple() {
 }
 
 LG_redhat() {
-  echo $passwd | sudo -S yum makecache
+  echo ${passwd}'\n' | sudo -S yum makecache
   export PKMGR='yum'
 }
 
 LG_debian() {
-  echo $passwd | sudo -S apt-get update
+  echo ${passwd}'\n' | sudo -S apt-get update
   export PKMGR='apt-get'
 }
 

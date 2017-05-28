@@ -11,7 +11,7 @@ main() {
     cp ${WORK_HOME}/zsh/cpplint.py ${HOME}/bin
   fi
 
-  if [ $LG_WORKSPACERC != 'LeGend-AI' ]; then
+  if [ "${LG_WORKSPACERC}" != "LeGend-AI" ]; then
     cat ${WORK_HOME}/zsh/.zshrc >> ${HOME}/.zshrc
   fi
 }
