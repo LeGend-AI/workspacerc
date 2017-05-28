@@ -3,7 +3,7 @@
 main() {
 
   export WORK_HOME=${HOME}/.workspacerc
-  if [[ -d ${WORK_HOME} ]]; then
+  if [ -d ${WORK_HOME} ]; then
     echo ${WORK_HOME}" already exists."
     exit 1
   fi
@@ -19,7 +19,7 @@ main() {
   source platform.sh
 
   LG_platform_check
-  if [[ $? != 0 ]]; then
+  if [ $? != 0 ]; then
     LG_LOG ERROR "Platform Unknown!"
     exit 1
   fi

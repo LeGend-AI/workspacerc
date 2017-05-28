@@ -1,8 +1,8 @@
 main() {
-  if [[ -d ${HOME}/.vim ]]; then
+  if [ -d ${HOME}/.vim ]; then
     rm -rf ${HOME}/.vim
   fi
-  if [[ -f ${HOME}/.vimrc ]]; then
+  if [ -f ${HOME}/.vimrc ]; then
     rm ${HOME}/.vimrc
   fi
   ln -s ${WORK_HOME}/vim/.vim ${HOME}/.vim
