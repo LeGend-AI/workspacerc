@@ -13,7 +13,7 @@ main() {
 
   if [ "${LG_WORKSPACERC}" != "LeGend-AI" ]; then
     cat ${WORK_HOME}/zsh/.zshrc >> ${HOME}/.zshrc
-    source ${HOME}/.zshrc
+    bash -c "source ${HOME}/.zshrc"
   fi
 }
 
