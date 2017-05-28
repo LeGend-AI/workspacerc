@@ -1,6 +1,6 @@
 main() {
   sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
-  if [ $? == 0 ]; then
+  if [ $? -eq 0 ]; then
     echo "alias search_code='find . -name "*.h" -or -name "*.cuh" \
            -or -name "*.cpp" \
            -or -name "*.cu" \
