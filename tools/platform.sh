@@ -1,28 +1,33 @@
 LG_INSTALL() {
-  echo $passwd | sudo $PKMGR install -y -q $*
+  if [ $PKMGR == "brew" ]]; then
+    brew install -y -q $*
+  else
+    echo $passwd | sudo $PKMGR install -y -q $*
+  fi
 }
 
 LG_apple() {
   if type brew >/dev/null 2>/dev/null; then
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   fi
-  echo $passwd | sudo brew update
+  brew update
   export PKMGR='brew'
 }
 
 LG_redhat() {
-  echo $passwd | sudo yum makecache
+  echo $passwd | sudo -S yum makecache
   export PKMGR='yum'
 }
 
 LG_debian() {
-  echo $passwd | sudo apt-get update
+  echo $passwd | sudo -S apt-get update
   export PKMGR='apt-get'
 }
 
 
 LG_platform_check() {
-  read -s -p "Enter your password: " passwd
+  echo -n "Enter your password: "
+  read -s passwd
   export passwd=$passwd
   if [[ $(uname) == 'Darwin' ]]; then
     LG_apple

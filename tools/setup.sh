@@ -28,13 +28,13 @@ main() {
   cd ../git && sh install.sh && cd ../tools
 
   LG_LOG INFO "zsh setup..."
-  if type zsh >/dev/null 2>/dev/null; then
+  if ! type zsh >/dev/null 2>/dev/null; then
     LG_INSTALL zsh
   fi
   cd ../zsh && sh install.sh && cd ../tools
 
   LG_LOG INFO "vim setup..."
-  if type vim >/dev/null 2>/dev/null; then
+  if ! type vim >/dev/null 2>/dev/null; then
     LG_INSTALL vim
   fi
   cd ../vim && zsh install.sh && cd ../tools
