@@ -7,5 +7,6 @@ alias search_code='find . -name "*.h" -or -name "*.cuh" \
   -or -name "*.proto" \
   -or -name "*.prototxt" \
   -or -name "*.cmake" | xargs grep -i --color=auto'
-#export LG_WORKSPACERC=LeGend-AI
+
+export LG_WORKSPACERC=LeGend-AI
 
