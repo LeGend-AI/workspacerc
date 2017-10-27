@@ -4,7 +4,7 @@ main() {
   fi
   if [ ! $LG_WORKSPACERC ]; then
     cat $WORK_HOME/zsh/.zshrc >> $HOME/.zshrc
-    source $HOME/.zshrc
+    . $HOME/.zshrc
   fi
 }
 
