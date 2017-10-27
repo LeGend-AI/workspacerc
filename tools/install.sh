@@ -3,7 +3,7 @@ main() {
   WORK_HOME=~/.workspacerc
 
   # require git
-  git clone https://github.com/legend-ai/workspacerc $WORK_HOME
+  #git clone https://github.com/legend-ai/workspacerc $WORK_HOME
 
   # require vim
   . $WORK_HOME/vim/setup.sh
@@ -11,7 +11,7 @@ main() {
   # require zsh
   . $WORK_HOME/zsh/setup.sh
 
-  ln -s ${HOME}/bin ${WORK_HOME}/tools/bin
+  ln -s ${WORK_HOME}/tools/bin ${HOME}/bin
 }
 
 main
