@@ -1,0 +1,15 @@
+main() {
+  proj_name=$1
+  if [ ! ${proj_name} ]; then
+    echo "Usage: $0 <project name>"
+    return 255
+  fi
+  if [ -d ${proj_name} ]; then
+    echo "Directory ${proj_name} already exists."
+    echo "Please select another path."
+    return 255
+  fi
+  echo "Create a new cxx project into ${proj_name}"
+  cp -r ${LG_WORKSPACERC}/cxxproj ${proj_name}
+}
+main $@

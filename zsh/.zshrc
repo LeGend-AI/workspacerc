@@ -14,5 +14,5 @@ alias search_code='find . -name "*.h" -or -name "*.cuh" \
   -or -name "*.prototxt" \
   -or -name "*.cmake" | xargs grep -i --color=auto'
 
-export LG_WORKSPACERC=LeGend-AI
-
+export PATH=${PATH}:~/bin
+export LG_WORKSPACERC=~/.workspacerc

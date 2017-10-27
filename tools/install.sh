@@ -10,6 +10,8 @@ main() {
 
   # require zsh
   . $WORK_HOME/zsh/setup.sh
+
+  ln -s ${HOME}/bin ${WORK_HOME}/tools/bin
 }
 
 main
