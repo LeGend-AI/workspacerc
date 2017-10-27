@@ -1,3 +1,9 @@
+export ZSH=~/.oh-my-zsh
+ZSH_THEME="robbyrussell"
+
+plugins=(git)
+source $ZSH/oh-my-zsh.sh
+
 alias search_code='find . -name "*.h" -or -name "*.cuh" \
   -or -name "*.cpp" \
   -or -name "*.cu" \
