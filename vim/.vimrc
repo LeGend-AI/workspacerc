@@ -148,8 +148,9 @@ set expandtab
 set smarttab
 
 " 1 tab == 2 spaces
-set shiftwidth=2
-set tabstop=2
+set shiftwidth=4
+set tabstop=4
+set expandtab
 
 " Linebreak on 500 characters
 set lbr
@@ -386,7 +387,7 @@ execute pathogen#infect()
 
 colorscheme peaksea
 set nu
-set cc=80
+set cc=100
 set fdm=syntax
 set foldlevel=100
 set cursorline
