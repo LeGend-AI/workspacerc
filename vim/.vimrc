@@ -152,6 +152,13 @@ set shiftwidth=4
 set tabstop=4
 set expandtab
 
+set fdm=indent
+set foldlevel=100
+set foldlevelstart=0
+set foldnestmax=10
+nnoremap <space> za
+vnoremap <space> za
+
 " Linebreak on 500 characters
 set lbr
 set tw=500
@@ -174,8 +181,8 @@ vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 " => Moving around, tabs, windows and buffers
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
-map <space> /
-map <c-space> ?
+" map <space> /
+" map <c-space> ?
 
 " Disable highlight when <leader><cr> is pressed
 map <silent> <leader><cr> :noh<cr>
@@ -388,8 +395,6 @@ execute pathogen#infect()
 colorscheme peaksea
 set nu
 set cc=100
-set fdm=syntax
-set foldlevel=100
 set cursorline
 set tabpagemax=18
 hi CursorLine cterm=NONE ctermbg=236
@@ -399,3 +404,4 @@ set fileencodings=ucs-bom,gb2312,utf-8,gbk,latin1,cp936
 
 let g:cpp_class_scope_highlight = 1
 let g:cpp_member_variable_highlight = 1
+
