@@ -1,6 +1,8 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_cnt =6
 let g:netrw_dirhist_1='/home/liuguo/.workspacerc'
 let g:netrw_dirhist_2='/home/lg/.workspacerc/cppproj/cmake/third_party'
 let g:netrw_dirhist_3='/home/liuguo/risk_model/ygz_profile_model'
 let g:netrw_dirhist_4='/home/liuguo'
+let g:netrw_dirhist_5='/home/liuguo/risk_model/ygz_anti_fraud_model_1_1'
+let g:netrw_dirhist_6='/home/liuguo/bill_shop_final/shop'
