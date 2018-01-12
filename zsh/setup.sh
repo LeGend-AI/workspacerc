@@ -4,7 +4,7 @@ main() {
   fi
   if [ ! $LG_WORKSPACERC ]; then
     if [ -f ${HOME}/.zshrc ]; then
-      tail -n13 ${WORK_HOME}/zsh/.zshrc >> ${HOME}/.zshrc 
+      tail -n14 ${WORK_HOME}/zsh/.zshrc >> ${HOME}/.zshrc 
     else
       cat $WORK_HOME/zsh/.zshrc >> $HOME/.zshrc
     fi

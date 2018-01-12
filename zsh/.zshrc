@@ -3,6 +3,7 @@ ZSH_THEME="robbyrussell"
 
 plugins=(git)
 source $ZSH/oh-my-zsh.sh
+PROMPT='${ret_status} %{$fg[cyan]%}%c%{$reset_color%} %{$fg[green]%}%*%{$reset_color%} $(git_prompt_info)'
 
 alias search_code='find . -name "*.h" -or -name "*.cuh" \
   -or -name "*.cpp" \
