@@ -148,8 +148,8 @@ set expandtab
 set smarttab
 
 " 1 tab == 2 spaces
-set shiftwidth=4
-set tabstop=4
+set shiftwidth=2
+set tabstop=2
 set expandtab
 
 set fdm=indent
@@ -400,7 +400,7 @@ set tabpagemax=18
 hi CursorLine cterm=NONE ctermbg=236
 map ,; :tabp<cr>
 map ,' :tabn<cr>
-set fileencodings=ucs-bom,gb2312,utf-8,gbk,latin1,cp936
+set fileencodings=utf-8,gucs-bom,gb2312,bk,latin1,cp936
 
 let g:cpp_class_scope_highlight = 1
 let g:cpp_member_variable_highlight = 1
