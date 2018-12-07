@@ -154,8 +154,8 @@ set expandtab
 
 set fdm=indent
 set foldlevel=100
-set foldlevelstart=0
-set foldnestmax=10
+set foldlevelstart=5
+set foldnestmax=5
 nnoremap <space> za
 vnoremap <space> za
 
