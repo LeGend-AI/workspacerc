@@ -27,22 +27,11 @@ command W w !sudo tee % > /dev/null
 " Set 7 lines to the cursor - when moving vertically using j/k
 set so=7
 
-" Avoid garbled characters in Chinese language windows OS
-let $LANG='en' 
-set langmenu=en
-source $VIMRUNTIME/delmenu.vim
-source $VIMRUNTIME/menu.vim
-
 " Turn on the WiLd menu
 set wildmenu
 
 " Ignore compiled files
-set wildignore=*.o,*~,*.pyc
-if has("win16") || has("win32")
-    set wildignore+=.git\*,.hg\*,.svn\*
-else
-    set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
-endif
+set wildignore=*.o,*~,*.pyc,*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
 
 "Always show current position
 set ruler
@@ -114,14 +103,6 @@ endtry
 
 set background=dark
 
-" Set extra options when running in GUI mode
-if has("gui_running")
-    set guioptions-=T
-    set guioptions-=e
-    set t_Co=256
-    set guitablabel=%M\ %t
-endif
-
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
 
@@ -175,14 +156,6 @@ set wrap "Wrap lines
 " Super useful! From an idea by Michael Naumann
 vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
 vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Moving around, tabs, windows and buffers
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
-" map <space> /
-" map <c-space> ?
 
 " Disable highlight when <leader><cr> is pressed
 map <silent> <leader><cr> :noh<cr>
@@ -401,7 +374,21 @@ hi CursorLine cterm=NONE ctermbg=236
 map ,; :tabp<cr>
 map ,' :tabn<cr>
 set fileencodings=utf-8,gucs-bom,gb2312,bk,latin1,cp936
+set encoding=utf-8
 
 let g:cpp_class_scope_highlight = 1
 let g:cpp_member_variable_highlight = 1
 
+func SetPyHeader()
+  call setline(1, "# coding:utf-8")
+  call append(line("."), '"""')
+  call append(line(".") + 1, 'FileName  :  '.expand("%:t"))
+  call append(line(".") + 2, 'Author    :  liuguo')
+  call append(line(".") + 3, 'Date      :  '.strftime("%Y-%m-%d %H:%M:%S"))
+  call append(line(".") + 4, '"""')
+  call append(line(".") + 5, '')
+  call append(line(".") + 6, '')
+endfunc
+
+autocmd BufNewFile *.py exec "call SetPyHeader()"
+autocmd BufNewFile * normal G
