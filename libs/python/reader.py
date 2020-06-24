@@ -17,6 +17,7 @@ class ParallelFileReader:
     def __init__(self, files, parse,
                  n_reader=8, n_merge=1,
                  batch_size=1024,
+                 buffer_size=10240*4*2,
                  gzip=True, infinite=False):
         assert type(files) in [list, tuple]
 
@@ -28,10 +29,9 @@ class ParallelFileReader:
 
         self.n_merge = n_merge
         self.merge_threads = []
-        self.running_merge_threads = 0
+        self.running_merge_threads = multiprocessing.Value('i')
+        #self.merge_queue = queue.Queue(math.ceil(buffer_size / 256))
         self.merge_queue = queue.Queue(20)
-        self.cache = []
-        self.idx = 0
 
         self.gzip = gzip
         self.parse = parse
@@ -44,14 +44,23 @@ class ParallelFileReader:
         loghandler.setFormatter(LOG_FORMAT)
         self.logger = logging.getLogger(__name__ + str(id(self)))
         self.logger.setLevel(logging.DEBUG)
-        self.logger.addHandler(loghandler)
+        self.logger.handlers = [loghandler]
 
     def _merge(self, idx, queues):
         running = len(queues)
-        self.logger.debug("merge thread-{} start".format(idx))
+        self.logger.debug("merge thread-{} start with {} queues".format(idx, running))
         for queue in itertools.cycle(queues):
             try:
                 data = queue.get(False)
+                if data == None:
+                    running -= 1
+                    if running <= 0:
+                        with self.running_merge_threads.get_lock():
+                            self.running_merge_threads.value -= 1
+                        if self.running_merge_threads.value <= 0:
+                            self._stop.value = True
+                        break
+                    continue
                 self.merge_queue.put(data)
                 self.logger.debug("merge data, queue size {}".format(self.merge_queue.qsize()))
             except:
@@ -101,32 +110,34 @@ class ParallelFileReader:
             process.start()
             self.reader_processes.append(process)
 
-        self.cache = []
-        self.idx = 0
-        self.merge_threads = []
-        self.running_merge_threads = 0
+        self.running_merge_threads.value = 0
         for i in range(self.n_merge):
             thread = Thread(target=self._merge, args=(i, self.reader_queues[i::self.n_merge]))
-            self.running_merge_threads += 1
-            thread.start()
+            self.running_merge_threads.value += 1
             self.merge_threads.append(thread)
+        for _ in self.merge_threads:
+            _.start()
 
     def stop(self):
         self._stop.value = True
-        for _ in self.reader_processes:
-            _.terminate()
-            _.join()
-        for _ in self.reader_queues:
+        for reader, queue in zip(self.reader_processes, self.reader_queues):
             try:
-                while not _.empty():
-                    _.get(False)
+                while not queue.empty():
+                    queue.get(False)
             except:
                 pass
-            _.put(None)
+            reader.join()
+        self.reader_processes.clear()
+        self.reader_queues.clear()
+        while self.running_merge_threads.value > 0:
+            try:
+                while not self.merge_queue.empty():
+                    self.merge_queue.get(False)
+            except:
+                pass
         for _ in self.merge_threads:
             _.join()
-        while not self.merge_queue.empty():
-            self.merge_queue.get(False)
+        self.merge_threads.clear()
 
     def __call__(self):
         return self
